@@ -1,0 +1,28 @@
+{
+    "name": "fawno/calameoapi",
+    "description": "CalameoAPI class",
+	"type": "library",
+	"keywords": ["Calameo", "api"],
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Fawno",
+        "homepage": "https://github.com/alphp/CalameoAPI/graphs/contributors"
+      }
+    ],
+    "support": {
+      "issues": "https://github.com/alphp/CalameoAPI/issues",
+      "source": "https://github.com/alphp/CalameoAPI"
+    },
+    "require": {
+      "php": ">=7.4.0",
+      "ext-dom": "*",
+      "ext-simplexml": "*",
+      "ext-libxml": "*"
+    },
+    "autoload": {
+      "psr-4": {
+        "Fawno\\Calameo\\": "src"
+      }
+    }
+}

@@ -1,16 +1,23 @@
 <?php
+	declare(strict_types=1);
+
+	namespace Fawno\Calameo;
+
+	use DOMDocument;
+	use SimpleXMLElement;
+
 	class CalameoAPI {
 
-		protected $url = array (
+		protected $url = [
 			'api' => 'http://api.calameo.com/1.0/',
 			'upload' => 'http://upload.calameo.com/1.0/',
-		);
+		];
 		protected $config;
 		protected $curl;
 
 		// Category (references)
 		// http://help.calameo.com/index.php?title=API:Category_(references)
-		protected $categories = array (
+		protected $categories = [
 			'DESIGN' => 'Arts & Design',
 			'BUSINESS' => 'Business',
 			'AUTO' => 'Cars',
@@ -35,7 +42,7 @@
 			'TECH' => 'Technology',
 			'TRAVEL' => 'Travels',
 			'VIDEOGAMES' => 'Videogames',
-		);
+		];
 
 		// Format (references)
 		// http://help.calameo.com/index.php?title=API:Format_(references)
@@ -251,7 +258,7 @@
 		);
 
 		// Initialize API with config.
-		// Config can be an object json, xml, an associative array, xml string, json string, a file xml or a file json  		
+		// Config can be an object json, xml, an associative array, xml string, json string, a file xml or a file json
 		public function __construct ($config = null) {
 			if (!empty($config)) $this->set_config($config);
 			$this->curl = curl_init();
@@ -262,22 +269,22 @@
 				case 'string':
 					if (is_file($config)) $config = file_get_contents($config);
 					if ($config[0] == '<') {
-						$config = new SimpleXMLElement($config);						
-          } else break;
+						$config = new SimpleXMLElement($config);
+					} else break;
 				case 'array':
 				case 'object':
 					$config = json_encode($config);
 					break;
 				default:
 					return false;
-      }
+			}
 			$this->config = json_decode($config);
-			return true;			
-    }
-		
+			return true;
+		}
+
 		public function __destruct () {
-			curl_close($this->curl);			
-    }
+			curl_close($this->curl);
+		}
 
 		protected function curl_file_create ($filename, $mimetype = null, $postname = null) {
 			$file = null;
@@ -289,12 +296,12 @@
 				} else {
 					$file = '@';
 					$file .= realpath($filename);
-					$file .= ';filename=' . $postname; 			
+					$file .= ';filename=' . $postname;
 					if (isset($mimetype)) $file .= ';type=' . $mimetype;
 				}
 			}
 			return $file;
-		}		
+		}
 
 		// Sign Request
 		// http://help.calameo.com/index.php?title=API:How_To_Sign_Your_Requests
@@ -340,11 +347,11 @@
 			}
 
 			return $response;
-    }
+		}
 
 		// API.getAccountInfos
 		//		http://help.calameo.com/index.php?title=API:API.getAccountInfos
-		//		This action allows you to recover the information about your account. 			
+		//		This action allows you to recover the information about your account.
 		// Response:
 		//		Name					Type			Description
 		//		ID						integer		Account's ID
@@ -358,7 +365,7 @@
 			$fields['action'] = __FUNCTION__;
 
 			return json_decode($this->doRequest($fields));
-    }
+		}
 
 		// API.fetchAccountSubscriptions
 		//		http://help.calameo.com/index.php?title=API:API.fetchAccountSubscriptions
@@ -386,7 +393,7 @@
 			$fields['action'] = __FUNCTION__;
 
 			return json_decode($this->doRequest($fields));
-    }		
+		}
 
 		// API.fetchAccountBooks
 		//		http://help.calameo.com/index.php?title=API:API.fetchAccountBooks
@@ -426,9 +433,9 @@
 			$fields['action'] = __FUNCTION__;
 
 			return json_decode($this->doRequest($fields));
-    }		
+		}
 
-		public function fetchAllAccountBooks() {	
+		public function fetchAllAccountBooks() {
 			$fields['start'] = 0;
 			$fields['step'] = 50;
 			$books = array();
@@ -472,7 +479,7 @@
 			$fields['action'] = __FUNCTION__;
 
 			return json_decode($this->doRequest($fields));
-    }		
+		}
 
 		// API.getSubscriptionInfos
 		//		http://help.calameo.com/index.php?title=API:API.getSubscriptionInfos
@@ -495,10 +502,10 @@
 		//			PublicUrl				string		Absolute URL for the subscription's overview.
 		public function getSubscriptionInfos ($subscription_id) {
 			$fields['action'] = __FUNCTION__;
-			$fields['subscription_id'] = $subscription_id;  			
+			$fields['subscription_id'] = $subscription_id;
 
 			return json_decode($this->doRequest($fields));
-    }		
+		}
 
 		// API.fetchSubscriptionBooks
 		//		http://help.calameo.com/index.php?title=API:API.fetchSubscriptionBooks
@@ -537,10 +544,10 @@
 		//			CommentsUrl		string		Absolute URL for the publication's comments.
 		public function fetchSubscriptionBooks ($subscription_id, $fields = array()) {
 			$fields['action'] = __FUNCTION__;
-			$fields['subscription_id'] = $subscription_id; // ID of the subscription.  			
+			$fields['subscription_id'] = $subscription_id; // ID of the subscription.
 
 			return json_decode($this->doRequest($fields));
-    }		
+		}
 
 		// API.fetchSubscriptionSubscribers
 		//		http://help.calameo.com/index.php?title=API:API.fetchSubscriptionSubscribers
@@ -570,10 +577,10 @@
 		//			Extras					string		Additional information on the subscriber, in varchar format up to 255 characters in size
 		public function fetchSubscriptionSubscribers ($subscription_id, $fields = array()) {
 			$fields['action'] = __FUNCTION__;
-			$fields['subscription_id'] = $subscription_id; // ID of the subscription.  			
+			$fields['subscription_id'] = $subscription_id; // ID of the subscription.
 
 			return json_decode($this->doRequest($fields));
-    }		
+		}
 
 		// API.getBookInfos
 		//		http://help.calameo.com/index.php?title=API:API.getBookInfos
@@ -608,10 +615,10 @@
 		//			CommentsUrl		string		Absolute URL for the publication's comments.
 		public function getBookInfos ($book_id) {
 			$fields['action'] = __FUNCTION__;
-			$fields['book_id'] = $book_id;  			
+			$fields['book_id'] = $book_id;
 
 			return json_decode($this->doRequest($fields));
-    }		
+		}
 
 		// API.activateBook
 		//		http://help.calameo.com/index.php?title=API:API.activateBook
@@ -623,10 +630,10 @@
 		//		This request sends the character string ok if successful.
 		public function activateBook ($book_id) {
 			$fields['action'] = __FUNCTION__;
-			$fields['book_id'] = $book_id;  			
+			$fields['book_id'] = $book_id;
 
 			return json_decode($this->doRequest($fields));
-    }		
+		}
 
 		// API.deactivateBook
 		//		http://help.calameo.com/index.php?title=API:API.deactivateBook
@@ -638,10 +645,10 @@
 		//		This request sends the character string ok if successful.
 		public function deactivateBook ($book_id) {
 			$fields['action'] = __FUNCTION__;
-			$fields['book_id'] = $book_id;  			
+			$fields['book_id'] = $book_id;
 
 			return json_decode($this->doRequest($fields));
-    }		
+		}
 
 		// API.updateBook
 		//		http://help.calameo.com/index.php?title=API:API.updateBook
@@ -707,10 +714,10 @@
 		//			CommentsUrl		string		Absolute URL for the publication's comments.
 		public function updateBook ($book_id, $fields = array()) {
 			$fields['action'] = __FUNCTION__;
-			$fields['book_id'] = $book_id;  			
+			$fields['book_id'] = $book_id;
 
 			return json_decode($this->doRequest($fields));
-    }		
+		}
 
 		// API.deleteBook
 		//		http://help.calameo.com/index.php?title=API:API.deleteBook
@@ -722,10 +729,10 @@
 		//		This request sends the character string ok if successful.
 		public function deleteBook ($book_id) {
 			$fields['action'] = __FUNCTION__;
-			$fields['book_id'] = $book_id;  			
+			$fields['book_id'] = $book_id;
 
 			return json_decode($this->doRequest($fields));
-    }		
+		}
 
 		// API.fetchBookTocs
 		//		http://help.calameo.com/index.php?title=API:API.fetchBookTocs
@@ -741,10 +748,10 @@
 		//			PageNumber		integer		Page number linked to the item.
 		public function fetchBookTocs ($book_id) {
 			$fields['action'] = __FUNCTION__;
-			$fields['book_id'] = $book_id;  			
+			$fields['book_id'] = $book_id;
 
 			return json_decode($this->doRequest($fields));
-    }		
+		}
 
 		// API.fetchBookComments
 		//		http://help.calameo.com/index.php?title=API:API.fetchBookComments
@@ -767,10 +774,10 @@
 		//			Text						string		Text of the comment.
 		public function fetchBookComments ($book_id, $fields = array()) {
 			$fields['action'] = __FUNCTION__;
-			$fields['book_id'] = $book_id;  			
+			$fields['book_id'] = $book_id;
 
 			return json_decode($this->doRequest($fields));
-    }		
+		}
 
 		// API.renewBookPrivateUrl
 		//		http://help.calameo.com/index.php?title=API:API.renewBookPrivateUrl
@@ -805,10 +812,10 @@
 		//			CommentsUrl		string		Absolute URL for the publication's comments.
 		public function renewBookPrivateUrl ($book_id) {
 			$fields['action'] = __FUNCTION__;
-			$fields['book_id'] = $book_id;  			
+			$fields['book_id'] = $book_id;
 
 			return json_decode($this->doRequest($fields));
-    }		
+		}
 
 		// API.publish
 		//		http://help.calameo.com/index.php?title=API:API.publish
@@ -873,11 +880,11 @@
 		//			CommentsUrl		string		Absolute URL for the publication's comments.
 		public function publish ($file, $fields = array()) {
 			$fields['action'] = __FUNCTION__;
-			//$fields['file'] = '@' . realpath($file);  			
-			$fields['file'] = $this->curl_file_create($file);  			
+			//$fields['file'] = '@' . realpath($file);
+			$fields['file'] = $this->curl_file_create($file);
 
 			return json_decode($this->doRequest($fields));
-    }		
+		}
 
 		// API.revise
 		//		http://help.calameo.com/index.php?title=API:API.revise
@@ -913,22 +920,22 @@
 		//			CommentsUrl		string		Absolute URL for the publication's comments.
 		public function revise ($book_id, $file) {
 			$fields['action'] = __FUNCTION__;
-			$fields['book_id'] = $book_id;  			
-			//$fields['file'] = '@' . realpath($file);  			
-			$fields['file'] = $this->curl_file_create($file);  			
+			$fields['book_id'] = $book_id;
+			//$fields['file'] = '@' . realpath($file);
+			$fields['file'] = $this->curl_file_create($file);
 
 			return json_decode($this->doRequest($fields));
-    }		
+		}
 
 		// Returns config as JSON string
 		public function configJSON () {
-			return json_encode($this->config, JSON_PRETTY_PRINT);			
-    }
+			return json_encode($this->config, JSON_PRETTY_PRINT);
+		}
 
 		// Returns config as associative array
 		public function configPHP () {
-			return json_decode(json_encode($this->config), true);			
-    }
+			return json_decode(json_encode($this->config), true);
+		}
 
 		// Returns config as XML string
 		public function configXML () {
@@ -936,9 +943,8 @@
 			$config->formatOutput = true;
 			$root = $config->appendChild($config->createElement('calameoConfig'));
 			foreach (json_decode(json_encode($this->config), true) as $item => $value) {
-				$root->appendChild($config->createElement($item, $value));					
+				$root->appendChild($config->createElement($item, $value));
 			}
 			return $config->saveXML();
-    }	
+		}
 	}
-?>
