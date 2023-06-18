@@ -16,7 +16,7 @@ use DOMDocument;
 
 		// Category (references)
 		// http://help.calameo.com/index.php?title=API:Category_(references)
-		protected $categories = [
+		public const CATEGORIES = [
 			'DESIGN' => 'Arts & Design',
 			'BUSINESS' => 'Business',
 			'AUTO' => 'Cars',
@@ -45,7 +45,7 @@ use DOMDocument;
 
 		// Format (references)
 		// http://help.calameo.com/index.php?title=API:Format_(references)
-		protected $formats = [
+		public const FORMATS = [
 			'ALBUMS' => 'Albums',
 			'BD' => 'B.D.',
 			'BOOKS' => 'Books',
@@ -66,7 +66,7 @@ use DOMDocument;
 
 		//Language (references)
 		//http://help.calameo.com/index.php?title=API:Language_(references)
-		protected $languages = [
+		public const LANGUAGES = [
 			'unknown' => 'Unknown',
 			'en' => 'English',
 			'fr' => 'French',
