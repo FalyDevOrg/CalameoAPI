@@ -12,6 +12,8 @@ PHP Class CalameoAPI
 
 http://alphaonphp.blogspot.com.es/p/clase-calameoapi.html
 
+https://developer.calameo.com/content/api/
+
 ## Installation using Composer
 
 You can install this plugin into your application using
