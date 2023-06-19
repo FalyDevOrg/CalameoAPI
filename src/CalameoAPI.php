@@ -378,6 +378,24 @@ use DOMDocument;
 			return json_decode($this->doRequest($fields));
 		}
 
+		public function fetchAllAccountSubscriptions() {
+			$fields = [
+				'start' => 0,
+				'step' => 50,
+			];
+
+			$subscriptions = [];
+			do {
+				$result = $this->fetchAccountSubscriptions($fields);
+				if ($result->response->status == 'ok') {
+					$subscriptions = array_merge($subscriptions, $result->response->content->items);
+					$fields['start'] += $fields['step'];
+				}
+			} while ($fields['start'] < $result->response->content->total);
+
+			return $subscriptions;
+		}
+
 		// API.fetchAccountBooks
 		//		https://developer.calameo.com/content/api/#fetchAccountBooks
 		//		This action allows you to fetch your account's publications.
