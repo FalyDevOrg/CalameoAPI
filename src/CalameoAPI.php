@@ -264,6 +264,8 @@ use DOMDocument;
 
 		/**
 		 * Activation status.
+		 * - 0 (disabled)
+		 * - 1 (enabled)
 		*/
 		public const PUBLISHED = [
 			0 => 'Disabled',
@@ -272,6 +274,8 @@ use DOMDocument;
 
 		/**
 		 * Access to the publication.
+		 * - 1 (public)
+		 * - 2 (private)
 		*/
 		public const PUBLISHING_MODE = [
 			1 => 'Public',
@@ -280,6 +284,8 @@ use DOMDocument;
 
 		/**
 		 * Use a private URL.
+		 * - 0 (disabled)
+		 * - 1 (enabled)
 		*/
 		public const PRIVATE_URL = [
 			0 => 'Disabled',
@@ -288,6 +294,9 @@ use DOMDocument;
 
 		/**
 		 * Default viewing mode.
+		 * - book
+		 * - slide
+		 * - scroll
 		*/
 		public const VIEW = [
 			'book'   => 'Book',
@@ -296,7 +305,9 @@ use DOMDocument;
 		];
 
 		/**
-		 * Allow subscribers' access.
+		 * Allow subscribers access.
+		 * - 0 (disabled)
+		 * - 1 (enabled)
 		*/
 		public const SUBSCRIBE = [
 			0 => 'Disabled',
@@ -305,15 +316,25 @@ use DOMDocument;
 
 		/**
 		 * Comments behavior.
+		 * - 0 (disabled)
+		 * - 1 (moderate all)
+		 * - 2 (moderate all except contacts)
+		 * - 3 (accept only contacts)
+		 * - 4 (accept all)
 		*/
 		public const COMMENT = [
 			0 => 'Disabled',
 			1 => 'Moderate all',
-			2 => 'Accept all',
+			2 => 'Moderate all except contacts',
+			3 => 'Accept only contacts',
+			4 => 'Accept all',
 		];
 
 		/**
 		 * Download behavior.
+		 * - 0 (disabled)
+		 * - 1 (only contacts)
+		 * - 2 (everyone)
 		*/
 		public const DOWNLOAD = [
 			0 => 'Disabled',
@@ -323,6 +344,9 @@ use DOMDocument;
 
 		/**
 		 * Print behavior.
+		 * - 0 (disabled)
+		 * - 1 (only contacts)
+		 * - 2 (everyone)
 		*/
 		public const PRINT = [
 			0 => 'Disabled',
@@ -332,6 +356,8 @@ use DOMDocument;
 
 		/**
 		 * Share menu.
+		 * - 0 (disabled)
+		 * - 1 (enabled)
 		 * Enabled by default.
 		*/
 		public const SHARE = [
@@ -341,6 +367,8 @@ use DOMDocument;
 
 		/**
 		 * Restrict access to adults.
+		 * - 0 (no)
+		 * - 1 (yes)
 		*/
 		public const ADULT = [
 			0 => 'No',
@@ -349,6 +377,8 @@ use DOMDocument;
 
 		/**
 		 * Reading direction.
+		 * - 0 (left-to-right)
+		 * - 1 (right-to-left "manga mode")
 		*/
 		public const DIRECTION = [
 			0 => 'Left to right',
@@ -357,6 +387,8 @@ use DOMDocument;
 
 		/**
 		 * Background music mode.
+		 * - 0 (loop forever)
+		 * - 1 (play only once)
 		*/
 		public const MUSIC = [
 			0 => 'Loop forever',
@@ -365,6 +397,8 @@ use DOMDocument;
 
 		/**
 		 * Play sound effects like page flipping.
+		 * - 0 (disabled)
+		 * - 1 (enabled)
 		*/
 		public const SFX = [
 			0 => 'Disabled',
