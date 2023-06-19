@@ -14,8 +14,10 @@ use DOMDocument;
 		protected $config;
 		protected $curl;
 
-		// Category (references)
-		// http://help.calameo.com/index.php?title=API:Category_(references)
+		/**
+		 * Category (references)
+		 * http://help.calameo.com/index.php?title=API:Category_(references)
+		*/
 		public const CATEGORIES = [
 			'DESIGN' => 'Arts & Design',
 			'BUSINESS' => 'Business',
@@ -43,8 +45,10 @@ use DOMDocument;
 			'VIDEOGAMES' => 'Videogames',
 		];
 
-		// Format (references)
-		// http://help.calameo.com/index.php?title=API:Format_(references)
+		/**
+		 * Format (references)
+		 * http://help.calameo.com/index.php?title=API:Format_(references)
+		*/
 		public const FORMATS = [
 			'ALBUMS' => 'Albums',
 			'BD' => 'B.D.',
@@ -64,8 +68,10 @@ use DOMDocument;
 			'SHEETMUSIC' => 'Sheet music',
 		];
 
-		//Language (references)
-		//http://help.calameo.com/index.php?title=API:Language_(references)
+		/**
+		 * Language (dialect)
+		 * http://help.calameo.com/index.php?title=API:Language_(references)
+		*/
 		public const LANGUAGES = [
 			'unknown' => 'Unknown',
 			'en' => 'English',
@@ -254,6 +260,115 @@ use DOMDocument;
 			'yo' => 'Yoruba',
 			'za' => 'Zhuang',
 			'zu' => 'Zulu',
+		];
+
+		/**
+		 * Activation status.
+		*/
+		public const PUBLISHED = [
+			0 => 'Disabled',
+			1 => 'Enabled',
+		];
+
+		/**
+		 * Access to the publication.
+		*/
+		public const PUBLISHING_MODE = [
+			1 => 'Public',
+			2 => 'Private',
+		];
+
+		/**
+		 * Use a private URL.
+		*/
+		public const PRIVATE_URL = [
+			0 => 'Disabled',
+			1 => 'Enabled',
+		];
+
+		/**
+		 * Default viewing mode.
+		*/
+		public const VIEW = [
+			'book'   => 'Book',
+			'slide'  => 'Slide',
+			'scroll' => 'Scroll',
+		];
+
+		/**
+		 * Allow subscribers' access.
+		*/
+		public const SUBSCRIBE = [
+			0 => 'Disabled',
+			1 => 'Enabled',
+		];
+
+		/**
+		 * Comments behavior.
+		*/
+		public const COMMENT = [
+			0 => 'Disabled',
+			1 => 'Moderate all',
+			2 => 'Accept all',
+		];
+
+		/**
+		 * Download behavior.
+		*/
+		public const DOWNLOAD = [
+			0 => 'Disabled',
+			1 => 'Only contacts',
+			2 => 'Everyone',
+		];
+
+		/**
+		 * Print behavior.
+		*/
+		public const PRINT = [
+			0 => 'Disabled',
+			1 => 'Only contacts',
+			2 => 'Everyone',
+		];
+
+		/**
+		 * Share menu.
+		 * Enabled by default.
+		*/
+		public const SHARE = [
+			0 => 'Disabled',
+			1 => 'Enabled',
+		];
+
+		/**
+		 * Restrict access to adults.
+		*/
+		public const ADULT = [
+			0 => 'No',
+			1 => 'Yes',
+		];
+
+		/**
+		 * Reading direction.
+		*/
+		public const DIRECTION = [
+			0 => 'Left to right',
+			1 => 'Right to left',
+		];
+
+		/**
+		 * Background music mode.
+		*/
+		public const MUSIC = [
+			0 => 'Loop forever',
+			1 => 'Play only once',
+		];
+
+		/**
+		 * Play sound effects like page flipping.
+		*/
+		public const SFX = [
+			0 => 'Disabled',
+			1 => 'Enabled',
 		];
 
 		// Initialize API with config.
